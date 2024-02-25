@@ -1,7 +1,12 @@
+from __future__ import annotations
+
 import random
-from collections.abc import Callable
 from dataclasses import dataclass
 from itertools import starmap
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 NAMES: list[str] = []
 

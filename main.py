@@ -1,12 +1,17 @@
+from __future__ import annotations
+
 import argparse
 import json
 import sys
-from collections.abc import Callable
 from contextlib import suppress
+from typing import TYPE_CHECKING
 
 from cutechess import CutechessMan
 from ga import Dna, GaParams, GeneticAlgorithm
 from params import from_params, get_params
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def create_uci(names: list[str], params: list[int]) -> list[str]:
