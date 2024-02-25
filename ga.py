@@ -46,12 +46,10 @@ class Constraints:
 
     def sq_dist(self, a: Dna, b: Dna) -> float:
         return sum(
-            [
-                self.diff(a, b, r, ordinal) ** 2
-                for a, b, r, ordinal in zip(
-                    a.values, b.values, self.range, self.ordinal
-                )
-            ]
+            self.diff(a, b, r, ordinal) ** 2
+            for a, b, r, ordinal in zip(
+                a.values, b.values, self.range, self.ordinal
+            )
         )
 
 
