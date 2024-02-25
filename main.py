@@ -1,12 +1,17 @@
-import sys
-from typing import Callable
+from __future__ import annotations
 
-from ga import Dna, GaParams, GeneticAlgorithm
-from cutechess import CutechessMan
-import json
 import argparse
+import json
+import sys
+from contextlib import suppress
+from typing import TYPE_CHECKING
 
+from cutechess import CutechessMan
+from ga import Dna, GaParams, GeneticAlgorithm
 from params import from_params, get_params
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def create_uci(names: list[str], params: list[int]) -> list[str]:
@@ -32,26 +37,22 @@ def create_select(
         if res is None:
             print("Error encountered with cutechess", file=sys.stderr)
             return dna_a
-        if res.wins > res.losses:
-            return dna_a
-        else:
-            return dna_b
+        return dna_a if res.wins > res.losses else dna_b
 
     return select
 
 
 def run(ga: GeneticAlgorithm, select: Callable[[Dna, Dna], Dna]) -> Dna | None:
     population_mean = None
-    try:
+    with suppress(BaseException):
         while True:
             ga.eliminate(select)
             ga.gen_population()
             population_mean = ga.population_mean()
-    finally:
-        return population_mean
+    return population_mean
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--tune", type=str, default="config.json", help="Config JSON file"
@@ -89,7 +90,7 @@ def main():
     cutechess = CutechessMan(**cutechess_params, engine=args.engine, book=args.book)
     select = create_select(cutechess, names)
 
-    ga_params: GaParams = GaParams(
+    ga_params = GaParams(
         constraints, args.population_size, args.mutation_rate
     )
     ga = GeneticAlgorithm(ga_params)

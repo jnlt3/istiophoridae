@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from subprocess import PIPE, Popen
-from typing import IO
 
 
 @dataclass
@@ -41,12 +40,12 @@ class CutechessMan:
         )
 
     def run(self, params_a: list[str], params_b: list[str]) -> MatchResult | None:
-        cmd: str = self._get_cutechess_cmd(params_a, params_b)
-        cutechess: Popen[bytes] = Popen(cmd.split(), stdout=PIPE)
+        cmd = self._get_cutechess_cmd(params_a, params_b)
+        cutechess = Popen(cmd.split(), stdout=PIPE)
 
-        score: list[int] = [0, 0, 0]
-        elo_diff: float = 0.0
-        stdout: IO[bytes] | None = cutechess.stdout
+        score = [0, 0, 0]
+        elo_diff = 0.0
+        stdout = cutechess.stdout
 
         while stdout is not None:
             # Read each line of output until the pipe closes
