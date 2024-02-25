@@ -44,7 +44,8 @@ class Constraints:
             if random.random() < mutation_chance / len(dna.values):
                 self._new_value(dna, index)
 
-    def diff(self, a: int, b: int, range_: int, ordinal: bool) -> float:
+    @staticmethod
+    def diff(a: int, b: int, range_: int, ordinal: bool) -> float:
         if ordinal:
             return (a - b) / range_
         return float(a != b)
