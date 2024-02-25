@@ -1,11 +1,10 @@
+import argparse
+import json
 import sys
 from typing import Callable
 
-from ga import Dna, GaParams, GeneticAlgorithm
 from cutechess import CutechessMan
-import json
-import argparse
-
+from ga import Dna, GaParams, GeneticAlgorithm
 from params import from_params, get_params
 
 
