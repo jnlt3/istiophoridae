@@ -17,11 +17,11 @@ class Constraints:
     ordinal: list[bool]
 
     def __post_init__(self) -> None:
-        self.range = [max - min for min, max in zip(self.min, self.max)]
+        self.range = [max_ - min_ for min_, max_ in zip(self.min, self.max)]
 
     def random_dna(self) -> Dna:
         constraint_iterator = zip(self.min, self.max)
-        return Dna([random.randint(min, max) for (min, max) in constraint_iterator])
+        return Dna([random.randint(min_, max_) for (min_, max_) in constraint_iterator])
 
     def _new_value(self, dna: Dna, index: int) -> None:
         if self.ordinal[index]:
@@ -38,9 +38,9 @@ class Constraints:
             if random.random() < mutation_chance / len(dna.values):
                 self._new_value(dna, index)
 
-    def diff(self, a: int, b: int, range: int, ordinal: bool) -> float:
+    def diff(self, a: int, b: int, range_: int, ordinal: bool) -> float:
         if ordinal:
-            return (a - b) / range
+            return (a - b) / range_
         return 0 if a == b else 1
 
     def sq_dist(self, a: Dna, b: Dna) -> float:
@@ -103,10 +103,10 @@ class GeneticAlgorithm:
         return new_a, new_b
 
     def population_mean(self) -> Dna:
-        sum = [0] * len(self.ga_params.constraints.min)
+        sum_ = [0] * len(self.ga_params.constraints.min)
         for dna in self.population:
-            for i in range(len(sum)):
-                sum[i] += dna.values[i]
-        for i in range(len(sum)):
-            sum[i] //= len(self.population)
-        return Dna(sum)
+            for i in range(len(sum_)):
+                sum_[i] += dna.values[i]
+        for i in range(len(sum_)):
+            sum_[i] //= len(self.population)
+        return Dna(sum_)

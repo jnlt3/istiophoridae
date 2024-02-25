@@ -20,13 +20,13 @@ def get_params() -> list[Param]:
 
 
 def from_params(params: list[Param]) -> tuple[Constraints, list[str]]:
-    name: list[str] = []
-    min: list[int] = []
-    max: list[int] = []
+    names: list[str] = []
+    min_: list[int] = []
+    max_: list[int] = []
     ordinal: list[bool] = []
     for param in params:
-        name.append(param.name)
-        min.append(param.min)
-        max.append(param.max)
+        names.append(param.name)
+        min_.append(param.min)
+        max_.append(param.max)
         ordinal.append(param.ordinal)
-    return Constraints(min, max, ordinal), name
+    return Constraints(min_, max_, ordinal), names
