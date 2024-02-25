@@ -21,8 +21,14 @@ The name of the tuner originates from the family of the fish: Istiophoridae.
 - Place engine executable in the engines directory, the opening book in the books directory and cutechess configuration in the config directory. 
 - Run with `python3 main.py --engine Engine --book Book.epd --cutechess config.json`
 
-# Missing Features:
+# Missing Features
 
 - Tuning results of non-ordinal parameters are currently broken.
 - There aren't any ways to impose constraints on parameters.
 - Tuner will always perform a global search, it is not possible to have a starting point.  
+
+
+# Contributing
+
+- Make sure to use `black` as formatter
+- Make sure to use `pylance` on strict mode   
