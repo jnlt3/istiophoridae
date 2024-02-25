@@ -1,0 +1,7 @@
+{
+  "cutechess": "./cutechess/cutechess-cli",
+  "games_per": 16,
+  "tc": "4+0.04",
+  "threads": 1,
+  "hash": 8
+}
