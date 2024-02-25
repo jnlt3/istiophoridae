@@ -50,7 +50,7 @@ def run(ga: GeneticAlgorithm, select: Callable[[Dna, Dna], Dna]) -> Dna | None:
         return population_mean
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--tune", type=str, default="config.json", help="Config JSON file"
