@@ -18,7 +18,7 @@ class Constraints:
     ordinal: list[bool]
 
     def __post_init__(self):
-        self.range: list[int] = [max - min for min, max in zip(self.min, self.max)]
+        self.range = [max - min for min, max in zip(self.min, self.max)]
 
     def random_dna(self) -> Dna:
         constraint_iterator = zip(self.min, self.max)
@@ -106,7 +106,7 @@ class GeneticAlgorithm:
         return new_a, new_b
 
     def population_mean(self) -> Dna:
-        sum: list[int] = [0] * len(self.ga_params.constraints.min)
+        sum = [0] * len(self.ga_params.constraints.min)
         for dna in self.population:
             for i in range(len(sum)):
                 sum[i] += dna.values[i]

@@ -89,7 +89,7 @@ def main():
     cutechess = CutechessMan(**cutechess_params, engine=args.engine, book=args.book)
     select = create_select(cutechess, names)
 
-    ga_params: GaParams = GaParams(
+    ga_params = GaParams(
         constraints, args.population_size, args.mutation_rate
     )
     ga = GeneticAlgorithm(ga_params)
