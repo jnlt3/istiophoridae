@@ -1,8 +1,8 @@
 import argparse
 import json
 import sys
+from collections.abc import Callable
 from contextlib import suppress
-from typing import Callable
 
 from cutechess import CutechessMan
 from ga import Dna, GaParams, GeneticAlgorithm

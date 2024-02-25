@@ -1,6 +1,6 @@
 import random
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 from itertools import starmap
 
 NAMES: list[str] = []
