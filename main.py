@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from contextlib import suppress
 from typing import Callable
 
 from cutechess import CutechessMan
@@ -31,23 +32,19 @@ def create_select(
         if res is None:
             print("Error encountered with cutechess", file=sys.stderr)
             return dna_a
-        if res.wins > res.losses:
-            return dna_a
-        else:
-            return dna_b
+        return dna_a if res.wins > res.losses else dna_b
 
     return select
 
 
 def run(ga: GeneticAlgorithm, select: Callable[[Dna, Dna], Dna]) -> Dna | None:
     population_mean = None
-    try:
+    with suppress(BaseException):
         while True:
             ga.eliminate(select)
             ga.gen_population()
             population_mean = ga.population_mean()
-    finally:
-        return population_mean
+    return population_mean
 
 
 def main() -> None:

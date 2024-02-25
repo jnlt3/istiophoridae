@@ -12,11 +12,11 @@ class Param:
 
 
 def get_params() -> list[Param]:
-    params: list[Param] = []
-    params.append(Param("A", 0, 100, True))
-    params.append(Param("B", 0, 100, True))
-    params.append(Param("C", 0, 100, True))
-    return params
+    return [
+        Param("A", 0, 100, True),
+        Param("B", 0, 100, True),
+        Param("C", 0, 100, True),
+    ]
 
 
 def from_params(params: list[Param]) -> tuple[Constraints, list[str]]:

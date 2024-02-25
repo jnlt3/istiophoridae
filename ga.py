@@ -1,6 +1,7 @@
 import random
 from dataclasses import dataclass
 from typing import Callable
+from itertools import starmap
 
 NAMES: list[str] = []
 
@@ -21,7 +22,7 @@ class Constraints:
 
     def random_dna(self) -> Dna:
         constraint_iterator = zip(self.min, self.max)
-        return Dna([random.randint(min_, max_) for (min_, max_) in constraint_iterator])
+        return Dna(list(starmap(random.randint, constraint_iterator)))
 
     def _new_value(self, dna: Dna, index: int) -> None:
         if self.ordinal[index]:
@@ -41,7 +42,7 @@ class Constraints:
     def diff(self, a: int, b: int, range_: int, ordinal: bool) -> float:
         if ordinal:
             return (a - b) / range_
-        return 0 if a == b else 1
+        return float(a != b)
 
     def sq_dist(self, a: Dna, b: Dna) -> float:
         return sum(
@@ -86,8 +87,7 @@ class GeneticAlgorithm:
             dna_a = self.population[i]
             dna_b = self.population[i + 1]
             new_dna_a, new_dna_b = self._crossover(dna_a, dna_b)
-            self.population.append(new_dna_a)
-            self.population.append(new_dna_b)
+            self.population.extend((new_dna_a, new_dna_b))
 
     def _crossover(self, a: Dna, b: Dna) -> tuple[Dna, Dna]:
         assert len(a.values) == len(b.values)
