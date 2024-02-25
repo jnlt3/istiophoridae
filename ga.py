@@ -48,7 +48,7 @@ class Constraints:
     def diff(a: int, b: int, range_: int, ordinal: bool) -> float:
         if ordinal:
             return (a - b) / range_
-        return float(a != b)
+        return 0 if a == b else 1
 
     def sq_dist(self, a: Dna, b: Dna) -> float:
         return sum(
